@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Amie Carroll",
+  "license": "MIT",
   "dependencies": {
     "express": "^4.16.4"
   }
