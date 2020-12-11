@@ -5,16 +5,27 @@ const router = require("express").Router();
 const { uuid } = require("uuidv4");
 
 // read file and return notes as json
-router.get('api/notes', (req, res) => {
+router.get('/notes', (req, res) => {
   let collection = JSON.parse(fs.readFileSync('./db/db.json', 'UTF-8'));
   return res.json(collection);
 });
 
-// router.post('/notes', (req, res) => {
-//   const newNote = req.body;
-//   console.log(newNote);
-//  (no push or concat)
-//   return res.json(newNote);
-//});
-
+//
+router.post('/notes', (req, res) => {
+  // get new note from request body
+  const newNote = req.body;
+  console.log(JSON.stringify(newNote));
+  // get new id
+  newNote.id = uuid.v4;
+  // read collection from the db.json file
+  let collection = JSON.parse(fs.readFileSync('.db/db.json', 'UTF-8'));
+  // push new note to db.json
+  collection.push(newNote);
+  // save new note in db.json
+  fs.writeFileSync('./db/db.json', JSON.stringify(collection));
+  console.log('Note successfully added to file!');
+  // send response
+  return res.json(collection);
+});
+  
 module.exports = router;

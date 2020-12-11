@@ -6,7 +6,7 @@ const app = express();
 // create a port
 const PORT = process.env.PORT || 3001;
 
-const apiRoutes = require('./routes/apiRoutesMatthews.js');
+const apiRoutes = require('./routes/apiRoutes.js');
 const htmlRoutes = require('./routes/htmlRoutes.js');
 
 // use routes
