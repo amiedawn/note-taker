@@ -1,8 +1,8 @@
 const fs = require("fs");
 const router = require("express").Router();
 
-// uuidv4 for unique id
-const { v4: uuidv4 } = require("uuid");
+// uuid for unique id
+//const { uuid } = require("uuid");
 
 // read file and return notes as json
 router.get('/notes', (req, res) => {
@@ -13,12 +13,12 @@ router.get('/notes', (req, res) => {
 //
 router.post('/notes', (req, res) => {
   // get new note from request body
-  const newNote = req.body;
+  let newNote = req.body;
   console.log(JSON.stringify(newNote));
   // get new id
-  newNote.id = uuidv4();
+  //newNote.id = uuid;
   // read collection from the db.json file
-  let collection = JSON.parse(fs.readFileSync('.db/db.json', 'UTF-8'));
+  let collection = JSON.parse(fs.readFileSync('./db/db.json', 'UTF-8'));
   // push new note to db.json
   collection.push(newNote);
   // save new note in db.json
@@ -28,4 +28,10 @@ router.post('/notes', (req, res) => {
   return res.json(collection);
 });
   
+
+// read file and get a note with a specific id
+router.get('/notes/:id', (req, res) => {
+  let collection = JSON.parse(fs.readFileSync("./db/db.json", "UTF-8"));
+  return res.json(collection[req.params.id]);
+});
 module.exports = router;
