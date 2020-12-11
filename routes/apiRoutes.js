@@ -2,7 +2,7 @@ const fs = require("fs");
 const router = require("express").Router();
 
 // uuidv4 for unique id
-const { uuid } = require("uuidv4");
+const { v4: uuidv4 } = require("uuid");
 
 // read file and return notes as json
 router.get('/notes', (req, res) => {
@@ -16,7 +16,7 @@ router.post('/notes', (req, res) => {
   const newNote = req.body;
   console.log(JSON.stringify(newNote));
   // get new id
-  newNote.id = uuid.v4;
+  newNote.id = uuidv4();
   // read collection from the db.json file
   let collection = JSON.parse(fs.readFileSync('.db/db.json', 'UTF-8'));
   // push new note to db.json
