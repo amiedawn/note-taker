@@ -2,9 +2,8 @@ const fs = require('fs');
 const util = require('util');
 const uuidv1 = require("uuidv1");
 
-// read asynchronously
+// read and write file asynchronously
 const readFileNotes = util.promisify(fs.readFile);
-
 const writeFileNotes = util.promisify(fs.writeFile);
 
 // create a class
@@ -13,13 +12,14 @@ class Collection {
     return readFileNotes('db.json', 'UTF-8');
   }
 
+  // write note to database
   writeDb(note) {
     return writeFileNotes('db.json', JSON.stringify(note));
   }
 
-  // get notes from database
+  // read notes from database
   getNotes() {
-    return this.readDb().then((notes ) => {
+    return this.readDb().then(notes => {
       // convert json to array
       let noteArray;
       try {
@@ -33,11 +33,19 @@ class Collection {
     })
   }
 
+  // save note to database
   addNote() {
     // get title and text and link to its own section in the db
+    return this.getNotes().then(notes => {
+      
+    })
     // check if there is content, if not empty, add unique id
     // use writedb function to add to db
   }
+
+
+
+  // delete note from database
 };
 
 module.exports = new Collection();

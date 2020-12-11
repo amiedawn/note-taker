@@ -1,20 +1,20 @@
+const fs = require("fs");
 const router = require("express").Router();
-const Collection = require('../db/database');
 
-  // read file and return notes as json
-  router.get('/notes', (req, res) => {
-    Collection.getNotes().then((notes) => {
-      return res.json(notes);
-    })
-    // 500 is server error
-    .catch ((err) => res.status(500).json(err));
-  });
+// uuidv4 for unique id
+const { uuid } = require("uuidv4");
 
-   router.post('/notes', (req, res) => {
-  //   const newNote = req.body;
-  //   console.log(newNote);
-  //  (no push or concat)
-  //   return res.json(newNote);
-  // })
+// read file and return notes as json
+router.get('api/notes', (req, res) => {
+  let collection = JSON.parse(fs.readFileSync('./db/db.json', 'UTF-8'));
+  return res.json(collection);
+});
+
+// router.post('/notes', (req, res) => {
+//   const newNote = req.body;
+//   console.log(newNote);
+//  (no push or concat)
+//   return res.json(newNote);
+//});
 
 module.exports = router;
