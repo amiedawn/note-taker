@@ -13,8 +13,9 @@ module.exports = function (app) {
 
   app.post("/api/notes", (req, res) => {
     // get new note from request body
+    console.log("req.body: ", req.body);
     const newNote = req.body;
-      
+
     console.log(JSON.stringify(newNote));
 
     // get new id
