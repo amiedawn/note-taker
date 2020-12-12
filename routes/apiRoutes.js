@@ -1,21 +1,21 @@
 const fs = require("fs");
-//const router = require("express").router();
+const express = require("express");
+const app = express();
 
 // uuid for unique id
 const { v4: uuidV4 } = require("uuid");
 
-module.exports = function (app) {
+
   // read file and return notes as json
-  app.get("/api/notes", (req, res) => {
+  app.get("/notes", (req, res) => {
     let collection = JSON.parse(fs.readFileSync("./db/db.json", "UTF-8"));
     res.json(collection);
   });
 
-  app.post("/api/notes", (req, res) => {
+  app.post("/notes", (req, res) => {
     // get new note from request body
     console.log("req.body: ", req.body);
     const newNote = req.body;
-
     console.log(JSON.stringify(newNote));
 
     // get new id
@@ -34,4 +34,5 @@ module.exports = function (app) {
     // Send response
     res.json(collection);
   });
-};
+  
+module.exports = app;

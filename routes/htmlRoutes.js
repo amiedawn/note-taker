@@ -1,7 +1,8 @@
 const path = require('path');
-//const router = require('express').Router();
+const express = require("express");
+const app = express();
 
-module.exports = function (app) {
+
   // return the notes.html file from the server
   app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/notes.html'));
@@ -12,5 +13,5 @@ module.exports = function (app) {
     res.sendFile(path.join(__dirname, '../public/index.html'));
   });
 
-};
+  module.exports = app;
 
