@@ -7,20 +7,21 @@ const { v4: uuidV4 } = require("uuid");
 module.exports = function (app) {
   // read file and return notes as json
   app.get("/api/notes", (req, res) => {
-    let collection = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+    let collection = JSON.parse(fs.readFileSync("./db/db.json", "UTF-8"));
     res.json(collection);
   });
 
   app.post("/api/notes", (req, res) => {
     // get new note from request body
     const newNote = req.body;
+      
     console.log(JSON.stringify(newNote));
 
     // get new id
     newNote.id = uuidV4();
 
     // read collection from the db.json file
-    let collection = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+    let collection = JSON.parse(fs.readFileSync("./db/db.json", "UTF-8"));
 
     // push new note to db.json
     collection.push(newNote);
