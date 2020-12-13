@@ -14,7 +14,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // routes have to go AFTER middleware or it won't work
-
 app.use("/api", apiRoutes);
 app.use("/", htmlRoutes);
 
